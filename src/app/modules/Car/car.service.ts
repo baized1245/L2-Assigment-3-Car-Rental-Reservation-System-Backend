@@ -3,11 +3,19 @@ import { Car } from './car.model';
 
 // Creating car Into DB
 const createCarIntoDB = async (CarData: TCar) => {
-  const result = await Car.create(CarData);
+    const result = await Car.create(CarData);
 
-  return result;
+    return result;
+};
+
+// Get all car from DB
+const getAllCarFromDB = async () => {
+    const result = await Car.find();
+
+    return result;
 };
 
 export const CarServices = {
-  createCarIntoDB,
+    createCarIntoDB,
+    getAllCarFromDB
 };

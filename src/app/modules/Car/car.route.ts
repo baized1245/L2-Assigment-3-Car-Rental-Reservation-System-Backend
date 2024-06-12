@@ -6,9 +6,14 @@ import { CarValidation } from './car.validation';
 const router = express.Router();
 
 router.post(
-  '/cars',
-  validateRequest(CarValidation.carSchemaValidation),
-  CarControllers.craeteCar,
+    '/cars',
+    validateRequest(CarValidation.carSchemaValidation),
+    CarControllers.craeteCar,
+);
+
+router.get(
+    '/cars',
+    CarControllers.getAllCars,
 );
 
 export const CarRoutes = router;
