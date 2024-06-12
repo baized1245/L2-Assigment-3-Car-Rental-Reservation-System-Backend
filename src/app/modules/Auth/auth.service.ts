@@ -4,6 +4,14 @@ import { User } from '../User/user.model';
 import { TSignIn } from './auth.interface';
 import { createToken } from './auth.utils';
 import AppError from '../../errors/AppError';
+import { TUser } from '../User/user.interface';
+
+// Creating User Into DB
+const createUserIntoDB = async (userData: TUser) => {
+  const result = await User.create(userData);
+
+  return result;
+};
 
 // SignIn User Into DB
 const signInUser = async (payLoad: TSignIn) => {
@@ -46,4 +54,5 @@ const signInUser = async (payLoad: TSignIn) => {
 
 export const AuthServices = {
   signInUser,
+  createUserIntoDB,
 };

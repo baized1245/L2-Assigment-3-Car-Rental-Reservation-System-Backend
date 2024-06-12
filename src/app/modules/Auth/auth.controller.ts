@@ -3,6 +3,18 @@ import { AuthServices } from './auth.service';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 
+const craeteUser = catchAsync(async (req, res) => {
+  const result = await AuthServices.createUserIntoDB(req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User registered successfully!',
+    data: result,
+    // token: result?.token,
+  });
+});
+
 const signInUser = catchAsync(async (req, res) => {
   const result = await AuthServices.signInUser(req.body);
 
@@ -26,4 +38,5 @@ const signInUser = catchAsync(async (req, res) => {
 
 export const AuthController = {
   signInUser,
+  craeteUser,
 };
