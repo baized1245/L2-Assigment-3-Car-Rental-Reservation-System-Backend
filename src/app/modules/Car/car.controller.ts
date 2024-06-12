@@ -54,9 +54,23 @@ const updateACar = catchAsync(async (req, res) => {
   });
 });
 
+//Delete car (soft delete)
+const deleteACar = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await CarServices.deleteCarFromDB(id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Car deleted successfully!',
+    data: result,
+  });
+});
+
 export const CarControllers = {
   craeteCar,
   getAllCars,
   getSingleCar,
   updateACar,
+  deleteACar,
 };

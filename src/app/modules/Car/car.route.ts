@@ -21,4 +21,7 @@ router.get('/cars/:id', CarControllers.getSingleCar);
 //Update a car route
 router.put('/cars/:id', CarControllers.updateACar);
 
+//Delete a car route
+router.delete('/cars/:id', CarControllers.deleteACar);
+
 export const CarRoutes = router;

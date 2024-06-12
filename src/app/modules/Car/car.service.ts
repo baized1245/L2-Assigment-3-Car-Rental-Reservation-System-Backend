@@ -10,7 +10,7 @@ const createCarIntoDB = async (CarData: TCar) => {
 
 // Get all car from DB
 const getAllCarFromDB = async () => {
-  const result = await Car.find();
+  const result = await Car.find({ isDeleted: false });
 
   return result;
 };
@@ -30,9 +30,17 @@ const updateACarFromDB = async (id: string, updateData: Partial<TCar>) => {
   return result;
 };
 
+// Delete a car from DB
+const deleteCarFromDB = async (id: string) => {
+  const result = await Car.findByIdAndUpdate(id, { isDeleted: true });
+
+  return result;
+};
+
 export const CarServices = {
   createCarIntoDB,
   getAllCarFromDB,
   getSingleCarFromDB,
   updateACarFromDB,
+  deleteCarFromDB,
 };
