@@ -3,6 +3,7 @@ import cors from 'cors';
 // import { UserRoutes } from './app/modules/User/user.route';
 import { AuthRoutes } from './app/modules/Auth/auth.route';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import { CarRoutes } from './app/modules/Car/car.route';
 const app: Application = express();
 
 //parsers
@@ -15,8 +16,9 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // application routes
-// app.use('/api', UserRoutes);
 app.use('/api', AuthRoutes);
+// app.use('/api', UserRoutes);
+app.use('/api', CarRoutes);
 
 app.use(globalErrorHandler);
 

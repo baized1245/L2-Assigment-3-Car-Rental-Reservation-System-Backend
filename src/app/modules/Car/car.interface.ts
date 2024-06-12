@@ -1,5 +1,5 @@
 export type TCar = {
-  _id?: string
+  _id?: string;
   name: string;
   description: string;
   color: string;
@@ -8,6 +8,6 @@ export type TCar = {
   pricePerHour: number;
   status: 'available' | 'unavailable';
   isDeleted: boolean;
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt?: Date;
+  updatedAt?: Date;
 };
