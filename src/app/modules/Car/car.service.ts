@@ -3,19 +3,36 @@ import { Car } from './car.model';
 
 // Creating car Into DB
 const createCarIntoDB = async (CarData: TCar) => {
-    const result = await Car.create(CarData);
+  const result = await Car.create(CarData);
 
-    return result;
+  return result;
 };
 
 // Get all car from DB
 const getAllCarFromDB = async () => {
-    const result = await Car.find();
+  const result = await Car.find();
 
-    return result;
+  return result;
+};
+
+// Get single car from DB
+const getSingleCarFromDB = async (id: string) => {
+  const result = await Car.findById(id);
+
+  return result;
+};
+
+// Update a car from DB
+const updateACarFromDB = async (id: string, updateData: Partial<TCar>) => {
+  const options = { new: true };
+  const result = await Car.findByIdAndUpdate(id, updateData, options);
+
+  return result;
 };
 
 export const CarServices = {
-    createCarIntoDB,
-    getAllCarFromDB
+  createCarIntoDB,
+  getAllCarFromDB,
+  getSingleCarFromDB,
+  updateACarFromDB,
 };

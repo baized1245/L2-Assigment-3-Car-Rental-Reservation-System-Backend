@@ -5,15 +5,20 @@ import { CarValidation } from './car.validation';
 
 const router = express.Router();
 
+// Car create route
 router.post(
-    '/cars',
-    validateRequest(CarValidation.carSchemaValidation),
-    CarControllers.craeteCar,
+  '/cars',
+  validateRequest(CarValidation.carSchemaValidation),
+  CarControllers.craeteCar,
 );
 
-router.get(
-    '/cars',
-    CarControllers.getAllCars,
-);
+// All cars get route
+router.get('/cars', CarControllers.getAllCars);
+
+// Single car get route
+router.get('/cars/:id', CarControllers.getSingleCar);
+
+//Update a car route
+router.put('/cars/:id', CarControllers.updateACar);
 
 export const CarRoutes = router;
