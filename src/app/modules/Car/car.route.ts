@@ -8,7 +8,7 @@ const router = express.Router();
 // Car create route
 router.post(
   '/cars',
-  validateRequest(CarValidation.carSchemaValidation),
+  validateRequest(CarValidation.createCarSchemaValidation),
   CarControllers.craeteCar,
 );
 
@@ -19,7 +19,11 @@ router.get('/cars', CarControllers.getAllCars);
 router.get('/cars/:id', CarControllers.getSingleCar);
 
 //Update a car route
-router.put('/cars/:id', CarControllers.updateACar);
+router.put(
+  '/cars/:id',
+  validateRequest(CarValidation.updateCarSchemaValidation),
+  CarControllers.updateACar,
+);
 
 //Delete a car route
 router.delete('/cars/:id', CarControllers.deleteACar);
