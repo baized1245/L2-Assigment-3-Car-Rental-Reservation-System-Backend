@@ -4,6 +4,7 @@ import cors from 'cors';
 import { AuthRoutes } from './app/modules/Auth/auth.route';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import { CarRoutes } from './app/modules/Car/car.route';
+import { BookingRoutes } from './app/modules/Booking/booking.route';
 const app: Application = express();
 
 //parsers
@@ -19,6 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api', AuthRoutes);
 // app.use('/api', UserRoutes);
 app.use('/api', CarRoutes);
+app.use('/api', BookingRoutes);
 
 app.use(globalErrorHandler);
 

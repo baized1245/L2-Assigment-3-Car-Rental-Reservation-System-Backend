@@ -2,8 +2,8 @@ import { TCar } from './car.interface';
 import { Car } from './car.model';
 
 // Creating car Into DB
-const createCarIntoDB = async (CarData: TCar) => {
-  const result = await Car.create(CarData);
+const createCarIntoDB = async (carData: TCar) => {
+  const result = await Car.create(carData);
 
   return result;
 };
