@@ -24,13 +24,19 @@ const createBookingValidationSchema = z.object({
   }),
 });
 
+const returnCarValidationSchema = z.object({
+  body: z.object({
+    bookingId: z.string().nonempty('Booking ID is required'),
+    endTime: z
+      .string()
+      .regex(
+        /^([01]\d|2[0-3]):([0-5]\d)$/,
+        'Invalid end time format, expected HH:MM',
+      ),
+  }),
+});
+
 export const bookingValidation = {
   createBookingValidationSchema,
+  returnCarValidationSchema,
 };
-
-// date: z.string(),
-//   user: z.string(),
-//   car: z.string(),
-//   startTime: z.string(),
-//   endTime: z.string(),
-//   totalCost: z.number(),

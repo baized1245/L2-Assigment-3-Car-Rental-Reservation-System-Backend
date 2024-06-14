@@ -19,10 +19,3 @@ const bookingSchema: Schema = new Schema<TBooking>({
 });
 
 export const Booking = model<TBooking>('Booking', bookingSchema);
-
-// date: { type: String, required: true },
-//   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-//   car: { type: Schema.Types.ObjectId, ref: 'Car', required: true },
-//   startTime: { type: String, required: true },
-//   endTime: { type: String, required: true },
-//   totalCost: { type: Number, required: true },

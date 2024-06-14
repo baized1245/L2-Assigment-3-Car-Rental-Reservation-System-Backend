@@ -54,6 +54,20 @@ const updateACar = catchAsync(async (req, res) => {
   });
 });
 
+//Return a car
+const returnACar = catchAsync(async (req, res) => {
+  const { bookingId } = req.params;
+  const updateData = req.body;
+  const result = await CarServices.returntheCarFromUser(bookingId, updateData);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Car return successfully!',
+    data: result,
+  });
+});
+
 //Delete car (soft delete)
 const deleteACar = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -73,4 +87,5 @@ export const CarControllers = {
   getSingleCar,
   updateACar,
   deleteACar,
+  returnACar,
 };
