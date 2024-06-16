@@ -11,7 +11,7 @@ import handleDuplicateError from '../errors/handleDuplicateError';
 import AppError from '../errors/AppError';
 import { TErrorSources } from '../utils/interface/error';
 
-// Global error handler
+// Global error handler middleware function
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statuscode = 500;
   let message = 'Something went wrong!';
@@ -23,6 +23,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     },
   ];
 
+  // Handling different types of errors
   if (err instanceof ZodError) {
     const simplifiedError = handleZodError(err);
     statuscode = simplifiedError?.statusCode;
@@ -62,7 +63,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     ];
   }
 
-  //ultimate return
+  // Returning the formatted error response to the client
   return res.status(statuscode).json({
     success: false,
     message,
@@ -72,4 +73,5 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   });
 };
 
+// Exporting the globalErrorHandler function
 export default globalErrorHandler;

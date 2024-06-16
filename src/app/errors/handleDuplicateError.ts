@@ -1,5 +1,6 @@
 import { TErrorSources, TGenericErrorResponse } from '../utils/interface/error';
 
+//Handles duplicate key errors
 const handleDuplicateError = (err: any): TGenericErrorResponse => {
   const match = err.message.match(/"([^"]*)"/);
 
@@ -12,6 +13,7 @@ const handleDuplicateError = (err: any): TGenericErrorResponse => {
     },
   ];
 
+  //status code for the error
   const statusCode = 400;
 
   return {
@@ -21,4 +23,5 @@ const handleDuplicateError = (err: any): TGenericErrorResponse => {
   };
 };
 
+// Exporting the handleDuplicateError function
 export default handleDuplicateError;

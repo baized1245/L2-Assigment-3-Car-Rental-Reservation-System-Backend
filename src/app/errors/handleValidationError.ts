@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { TErrorSources, TGenericErrorResponse } from '../utils/interface/error';
 
+//Handles Mongoose validation errors
 const handleValidationError = (
   err: mongoose.Error.ValidationError,
 ): TGenericErrorResponse => {
@@ -13,6 +14,7 @@ const handleValidationError = (
     },
   );
 
+  //status code for validation errors
   const statusCode = 400;
 
   return {
@@ -22,4 +24,5 @@ const handleValidationError = (
   };
 };
 
+// Exporting the handleValidationError function
 export default handleValidationError;

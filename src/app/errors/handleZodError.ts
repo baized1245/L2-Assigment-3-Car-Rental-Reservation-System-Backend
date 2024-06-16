@@ -1,6 +1,7 @@
 import { ZodError, ZodIssue } from 'zod';
 import { TErrorSources, TGenericErrorResponse } from '../utils/interface/error';
 
+//Handles Zod validation errors
 const handleZodError = (err: ZodError): TGenericErrorResponse => {
   const errorSources: TErrorSources = err.issues.map((issue: ZodIssue) => {
     return {
@@ -9,6 +10,7 @@ const handleZodError = (err: ZodError): TGenericErrorResponse => {
     };
   });
 
+  //status code for validation errors
   const statusCode = 400;
 
   return {
@@ -18,4 +20,5 @@ const handleZodError = (err: ZodError): TGenericErrorResponse => {
   };
 };
 
+// Exporting the handleZodError function
 export default handleZodError;

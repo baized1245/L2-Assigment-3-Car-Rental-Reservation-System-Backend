@@ -1,5 +1,6 @@
 import { Response } from 'express';
 
+// Define a generic response structure
 type TResponse<T> = {
   statusCode: number;
   success: boolean;

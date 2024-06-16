@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { TErrorSources, TGenericErrorResponse } from '../utils/interface/error';
 
+//Handles Mongoose CastError
 const handleCastError = (
   err: mongoose.Error.CastError,
 ): TGenericErrorResponse => {
@@ -11,6 +12,7 @@ const handleCastError = (
     },
   ];
 
+  // status code for the error
   const statusCode = 400;
 
   return {
@@ -20,4 +22,5 @@ const handleCastError = (
   };
 };
 
+// Exporting the handleCastError function
 export default handleCastError;

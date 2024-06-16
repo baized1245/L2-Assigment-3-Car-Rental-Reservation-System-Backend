@@ -1,6 +1,5 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-// import { UserRoutes } from './app/modules/User/user.route';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import { CarRoutes } from './app/modules/Car/car.route';
 import { BookingRoutes } from './app/modules/Booking/booking.route';
@@ -13,7 +12,7 @@ app.use(cors());
 
 // Root route
 app.get('/', (req: Request, res: Response) => {
-  res.send('Level 2 student');
+  res.send('Level 2 student, BH.Sadhin');
 });
 
 // application routes
