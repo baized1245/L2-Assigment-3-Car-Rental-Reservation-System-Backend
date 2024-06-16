@@ -1,6 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose';
 import { TBooking } from './booking.interface';
-import { Car } from '../Car/car.model';
 
 const bookingSchema = new Schema<TBooking>(
   {
@@ -24,9 +23,9 @@ const bookingSchema = new Schema<TBooking>(
   },
 );
 
-bookingSchema.statics.isUserExists = async function (email: string) {
-  const existingUser = await Booking.find({ email });
-  return existingUser;
-};
+// bookingSchema.statics.isUserExists = async function (email: string) {
+//   const existingUser = await Booking.find({ email });
+//   return existingUser;
+// };
 
 export const Booking = model<TBooking>('Booking', bookingSchema);

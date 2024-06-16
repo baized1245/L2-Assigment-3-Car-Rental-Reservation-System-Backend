@@ -1,4 +1,4 @@
-import { Model, Schema, Types } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 // booking data type define
 export type TBooking = {

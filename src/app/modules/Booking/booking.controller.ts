@@ -39,8 +39,6 @@ const createABooking = catchAsync(async (req: Request, res: Response) => {
 const getAllBookings = catchAsync(async (req, res) => {
   const searchTerm: FilterQuery<TBooking> = {};
 
-  console.log({ searchTerm });
-
   // Dynamically build the search criteria based on query parameters
   if (req.query.carId) {
     searchTerm.car = req.query.carId as string;
@@ -51,8 +49,6 @@ const getAllBookings = catchAsync(async (req, res) => {
   }
 
   const result = await BookingServices.getAllBookingFromDB(searchTerm);
-
-  console.log({ result });
 
   if (!result || result.length === 0) {
     return NotFoundResponse(res);

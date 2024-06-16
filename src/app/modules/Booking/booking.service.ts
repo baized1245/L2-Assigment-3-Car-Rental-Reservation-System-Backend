@@ -71,9 +71,6 @@ const getMyBookingFromDB = async (payLoad: { email: string }) => {
 
 // Return a car and update the booking and car status
 const returnCarToDB = async (bookingId: string, endTime: string) => {
-  console.log('Booking ID:', bookingId); // Debugging log
-  console.log('End Time:', endTime); // Debugging log
-
   // Validate the bookingId
   if (!mongoose.Types.ObjectId.isValid(bookingId)) {
     throw new Error('Invalid Booking ID');

@@ -4,7 +4,6 @@ import validateRequest from '../../middlewares/validateRequest';
 import { CarValidation } from './car.validation';
 import auth from '../../middlewares/auth';
 import { USER_ROLE } from '../User/user.constant';
-import { BookingControllers } from '../Booking/booking.controller';
 
 const router = express.Router();
 

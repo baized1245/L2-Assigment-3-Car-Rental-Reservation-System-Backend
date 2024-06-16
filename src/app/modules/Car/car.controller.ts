@@ -68,6 +68,13 @@ const deleteACar = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await CarServices.deleteCarFromDB(id);
 
+  if (!result || result === null) {
+    return res.status(404).json({
+      success: false,
+      messasge: 'Car not exist with this id',
+    });
+  }
+
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
