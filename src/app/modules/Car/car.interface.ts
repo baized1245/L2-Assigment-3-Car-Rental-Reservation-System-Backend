@@ -4,9 +4,9 @@ export type TCar = {
   description: string;
   color: string;
   isElectric: boolean;
+  status: 'available' | 'unavailable';
   features: string[];
   pricePerHour: number;
-  status: 'available' | 'unavailable';
   isDeleted: boolean;
   createdAt?: Date;
   updatedAt?: Date;

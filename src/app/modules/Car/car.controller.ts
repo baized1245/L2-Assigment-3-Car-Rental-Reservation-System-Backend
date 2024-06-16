@@ -2,8 +2,10 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { CarServices } from './car.service';
+import { NotFoundResponse } from '../../utils/noDataFoundResponse';
+// import AppError from '../../errors/AppError';
 
-//Create a car
+//Create a car (admin controller )
 const craeteCar = catchAsync(async (req, res) => {
   const result = await CarServices.createCarIntoDB(req.body);
 
@@ -15,9 +17,15 @@ const craeteCar = catchAsync(async (req, res) => {
   });
 });
 
-//get all cars
+//get all cars (public controller)
 const getAllCars = catchAsync(async (req, res) => {
   const result = await CarServices.getAllCarFromDB();
+
+  // console.log(result);
+
+  if (!result || result.length === 0) {
+    return NotFoundResponse(res);
+  }
 
   sendResponse(res, {
     success: true,
@@ -27,10 +35,14 @@ const getAllCars = catchAsync(async (req, res) => {
   });
 });
 
-//get single car by _id
+//get single car by _id (public controller)
 const getSingleCar = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await CarServices.getSingleCarFromDB(id);
+
+  if (!result) {
+    return NotFoundResponse(res);
+  }
 
   sendResponse(res, {
     success: true,
@@ -40,30 +52,16 @@ const getSingleCar = catchAsync(async (req, res) => {
   });
 });
 
-//Update a car
+//Update a car (admin controller )
 const updateACar = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const updateData = req.body;
-  const result = await CarServices.updateACarFromDB(id, updateData);
+  const updatedData = req.body;
+  const result = await CarServices.updateACarFromDB(id, updatedData);
 
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
     message: 'Car updated successfully!',
-    data: result,
-  });
-});
-
-//Return a car
-const returnACar = catchAsync(async (req, res) => {
-  const { bookingId } = req.params;
-  const updateData = req.body;
-  const result = await CarServices.returntheCarFromUser(bookingId, updateData);
-
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Car return successfully!',
     data: result,
   });
 });
@@ -81,6 +79,20 @@ const deleteACar = catchAsync(async (req, res) => {
   });
 });
 
+// Return a car (admin controller)
+const returnACar = catchAsync(async (req, res) => {
+  const { bookingId, endTime } = req.body;
+
+  const result = await CarServices.returnTheCarFromUser(bookingId, endTime);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Car returned successfully',
+    data: result,
+  });
+});
+
 export const CarControllers = {
   craeteCar,
   getAllCars,
@@ -89,3 +101,21 @@ export const CarControllers = {
   deleteACar,
   returnACar,
 };
+
+// // Return a car
+// const returnACar = catchAsync(async (req, res) => {
+//   const { bookingId, endTime } = req.body;
+
+//   // console.log(bookingId);
+
+//   // Call service to return the car
+//   const result = await CarServices.returnTheCarFromUser(bookingId, endTime);
+
+//   // Send response with the updated booking details
+//   sendResponse(res, {
+//     success: true,
+//     statusCode: httpStatus.OK,
+//     message: 'Car returned successfully!',
+//     data: result,
+//   });
+// });

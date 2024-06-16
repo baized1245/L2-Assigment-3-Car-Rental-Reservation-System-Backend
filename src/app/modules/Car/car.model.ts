@@ -1,9 +1,10 @@
-import { Schema, model } from 'mongoose';
+import { Schema, Types, model } from 'mongoose';
 import { TCar } from './car.interface';
 
 // Define the Mongoose schema based on the TCar type
 const carSchema: Schema = new Schema<TCar>(
   {
+    _id: { type: Types.ObjectId, auto: true },
     name: { type: String, required: true },
     description: { type: String, required: true },
     color: { type: String, required: true },
@@ -12,11 +13,10 @@ const carSchema: Schema = new Schema<TCar>(
     pricePerHour: { type: Number, required: true },
     status: {
       type: String,
-      required: true,
       enum: ['available', 'unavailable'],
       default: 'available',
     },
-    isDeleted: { type: Boolean, required: true, default: false },
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true,

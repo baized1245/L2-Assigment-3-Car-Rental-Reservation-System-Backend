@@ -1,6 +1,11 @@
 import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
+export type TLogin = {
+  email: string;
+  password: string;
+};
+
 export interface TUser {
   _id?: string;
   name: string;

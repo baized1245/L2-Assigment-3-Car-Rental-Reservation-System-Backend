@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, Types, model } from 'mongoose';
 import { TUser, UserModel } from './user.interface';
 import bcrypt from 'bcrypt';
 import config from '../../config';
@@ -6,6 +6,7 @@ import config from '../../config';
 // Creating user model schema
 const userSchema = new Schema<TUser>(
   {
+    // _id: { type: Types.ObjectId, auto: true },
     name: { type: String, required: true },
     email: { type: String, required: true },
     role: { type: String, enum: ['user', 'admin'], required: true },
