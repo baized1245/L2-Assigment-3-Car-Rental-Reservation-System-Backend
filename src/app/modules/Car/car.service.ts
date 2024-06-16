@@ -1,3 +1,4 @@
+import AppError from '../../errors/AppError';
 import { Booking } from '../Booking/booking.model';
 import { TCar } from './car.interface';
 import { Car } from './car.model';
@@ -33,11 +34,18 @@ const updateACarFromDB = async (id: string, updatedData: Partial<TCar>) => {
 
 // Delete a car from DB
 const deleteCarFromDB = async (id: string) => {
-  const result = await Car.findByIdAndUpdate(id, { isDeleted: true });
+  const result = await Car.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    {
+      new: true,
+    },
+  );
 
   return result;
 };
 
+// Return a car (admin only)
 const returnTheCarFromUser = async (
   bookingId: string,
   endTime: string,
@@ -49,7 +57,7 @@ const returnTheCarFromUser = async (
       .populate('user');
 
     if (!booking) {
-      throw new Error('Booking not found');
+      throw new AppError(404, 'Booking not found');
     }
 
     const car = booking.car as unknown as TCar;
@@ -60,6 +68,14 @@ const returnTheCarFromUser = async (
 
     // Update the end time of the booking
     booking.endTime = endTime;
+
+    // Validate the endTime is less than startTime
+    if (
+      new Date(`1970-01-01T${endTime}:00Z`) >=
+      new Date(`1970-01-01T${booking.startTime}:00Z`)
+    ) {
+      throw new Error('The end time must be less than the start time');
+    }
 
     // Calculate total cost based on start time, end time, and car's price per hour
     const startDate = new Date(`1970-01-01T${booking.startTime}:00Z`);

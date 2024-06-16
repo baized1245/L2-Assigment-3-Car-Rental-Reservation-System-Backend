@@ -27,8 +27,13 @@ const auth = (...requiredRoles: string[]) => {
       ) as JwtPayload & { _id: string; role: string; userEmail: string };
 
       const user = await User.findOne({ email: decoded.userEmail });
+
       if (!user) {
-        throw new AppError(httpStatus.NOT_FOUND, 'User not found!');
+        return res.status(httpStatus.UNAUTHORIZED).json({
+          success: false,
+          statusCode: httpStatus.UNAUTHORIZED,
+          message: 'You have no access to this route',
+        });
       }
 
       if (requiredRoles.length && !requiredRoles.includes(user.role)) {
@@ -39,7 +44,12 @@ const auth = (...requiredRoles: string[]) => {
       req.user = user;
       next();
     } catch (error) {
-      return res.status(401).json({ message: 'Invalid token' });
+      // return res.status(401).json({ message: 'Invalid token' });
+      return res.status(httpStatus.UNAUTHORIZED).json({
+        success: false,
+        statusCode: httpStatus.UNAUTHORIZED,
+        message: 'You have no access to this route',
+      });
     }
   });
 };
