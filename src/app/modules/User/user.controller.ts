@@ -26,9 +26,6 @@ const signUpUser = catchAsync(async (req, res) => {
 const signInUser = catchAsync(async (req, res) => {
   const result = await UsersServices.signInUserService(req.body);
 
-  const { user } = result;
-  // console.log(user);
-
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -43,7 +40,6 @@ const signInUser = catchAsync(async (req, res) => {
       createdAt: result.createdAt,
       updatedAt: result.updatedAt,
     },
-    // data: { result },
     token: result.token,
   });
 });

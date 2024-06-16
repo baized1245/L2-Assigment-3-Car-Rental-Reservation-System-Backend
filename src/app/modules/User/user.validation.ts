@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// Validation schema for SignUp a user / admin
 const signupUserValidationSchema = z.object({
   body: z.object({
     name: z.string(),
@@ -13,6 +14,15 @@ const signupUserValidationSchema = z.object({
   }),
 });
 
+// Validation schema for SignIn a user / admin
+const sigInUserValidationSchema = z.object({
+  body: z.object({
+    email: z.string().email(),
+    password: z.string(),
+  }),
+});
+
 export const SignupUserValidation = {
   signupUserValidationSchema,
+  sigInUserValidationSchema,
 };

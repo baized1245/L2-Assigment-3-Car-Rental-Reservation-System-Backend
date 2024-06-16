@@ -21,13 +21,8 @@ const signUpUserIntoDB = async (userData: TUser) => {
 
 // SignIn User Into DB
 const signInUserService = async (payLoad: TLogin) => {
-  // console.log(await User.isUserExistsByEmail(payLoad.email));
-
-  // console.log(payLoad);
   //checking if the user is exist
   const user = await User.isUserExistsByEmail(payLoad.email);
-
-  // console.log({ user });
 
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found!');
@@ -44,14 +39,11 @@ const signInUserService = async (payLoad: TLogin) => {
     role: user.role,
   };
 
-  // console.log({ jwtPayload });
-
   const token = createToken(
     jwtPayload,
     config.jwt_access_secret as string,
     config.jwt_access_expires_in as string,
   );
-  // console.log({ token });
 
   return {
     _id: user._id,
