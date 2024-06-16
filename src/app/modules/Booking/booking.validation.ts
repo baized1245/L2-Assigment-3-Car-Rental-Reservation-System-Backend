@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// create booking validation
 const createBookingValidationSchema = z.object({
   body: z.object({
     date: z.string(),
@@ -13,6 +14,7 @@ const createBookingValidationSchema = z.object({
   }),
 });
 
+// return car validation
 const returnCarValidationSchema = z.object({
   body: z.object({
     bookingId: z.string().nonempty('Booking ID is required'),

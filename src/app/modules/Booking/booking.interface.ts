@@ -1,5 +1,6 @@
 import { Model, Schema, Types } from 'mongoose';
 
+// booking data type define
 export type TBooking = {
   date: string;
   user: Types.ObjectId;

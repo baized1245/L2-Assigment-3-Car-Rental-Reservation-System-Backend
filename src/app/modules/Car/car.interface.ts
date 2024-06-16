@@ -1,3 +1,4 @@
+//Car model types define
 export type TCar = {
   _id?: string;
   name: string;

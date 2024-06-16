@@ -1,7 +1,7 @@
 import { Schema, Types, model } from 'mongoose';
 import { TCar } from './car.interface';
 
-// Define the Mongoose schema based on the TCar type
+// Define the Mongoose schema based on the TCar
 const carSchema: Schema = new Schema<TCar>(
   {
     _id: { type: Types.ObjectId, auto: true },

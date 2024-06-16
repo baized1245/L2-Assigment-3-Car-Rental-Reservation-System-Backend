@@ -24,24 +24,6 @@ const bookingSchema = new Schema<TBooking>(
   },
 );
 
-// Pre-save hook to calculate the total cost
-bookingSchema.pre('save', async function (next) {
-  if (
-    this.isModified('startTime') ||
-    this.isModified('endTime') ||
-    this.isModified('car')
-  ) {
-    const car = await Car.findById(this.car);
-    if (car) {
-      const start = new Date(`1970-01-01T${this.startTime}:00Z`).getTime();
-      const end = new Date(`1970-01-01T${this.endTime}:00Z`).getTime();
-      const durationInHours = (end - start) / (1000 * 60 * 60);
-      this.totalCost = durationInHours * car.pricePerHour;
-    }
-  }
-  next();
-});
-
 bookingSchema.statics.isUserExists = async function (email: string) {
   const existingUser = await Booking.find({ email });
   return existingUser;

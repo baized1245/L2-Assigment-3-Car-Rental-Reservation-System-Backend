@@ -9,7 +9,8 @@ import { NotFoundResponse } from '../../utils/noDataFoundResponse';
 
 // Create a booking (user only)
 const createABooking = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user; // Extract the user object from req.user
+  // Extract the user object from req.user
+  const user = req.user;
 
   if (!user) {
     return res.status(400).json({ message: 'User not found in request' });
@@ -75,7 +76,6 @@ const getMyBookings = catchAsync(async (req, res) => {
     email: user.email,
   });
 
-  // If no bookings found, send a NotFound response
   if (!result || result.length === 0) {
     return NotFoundResponse(res);
   }

@@ -11,7 +11,7 @@ const createBookingIntoDB = async (bookingData: CreateBookingData) => {
   // Ensure car exists and is available
   const car = await Car.findOne({ _id: carId, status: 'available' });
   if (!car) {
-    throw new Error('Car not found or is not available');
+    throw new Error('Car not found or not available');
   }
 
   // Create a new booking object
@@ -32,11 +32,8 @@ const createBookingIntoDB = async (bookingData: CreateBookingData) => {
 
   // Populate user and car fields
   const populatedBooking = await Booking.findById(booking._id)
-    .populate('user', 'name email role phone address')
-    .populate(
-      'car',
-      'name description color isElectric features pricePerHour status isDeleted createdAt updatedAt',
-    )
+    .populate('user')
+    .populate('car')
     .exec();
 
   if (!populatedBooking) {
@@ -60,12 +57,11 @@ const getMyBookingFromDB = async (payLoad: { email: string }) => {
   // Find user by email
   const user = await User.findOne({ email: payLoad.email });
 
-  // If user not found, throw an error
   if (!user) {
     throw new Error('User not found');
   }
 
-  // Find bookings by user ID and populate user and car details
+  // Find bookings by user ID and populate user and car data
   const result = await Booking.find({ user: user._id })
     .populate('user')
     .populate('car');
@@ -90,8 +86,6 @@ const returnCarToDB = async (bookingId: string, endTime: string) => {
     throw new Error('Booking not found');
   }
 
-  console.log('Booking Found:', booking); // Debugging log
-
   // Check if the car is already returned
   if (booking.endTime) {
     throw new Error('Car is already returned');
@@ -108,8 +102,6 @@ const returnCarToDB = async (bookingId: string, endTime: string) => {
   if (!car) {
     throw new Error('Car not found');
   }
-
-  console.log('Car Found:', car); // Debugging log
 
   // Update the booking end time and calculate total cost
   booking.endTime = endTime;
@@ -134,11 +126,8 @@ const returnCarToDB = async (bookingId: string, endTime: string) => {
 
   // Populate user and car fields in booking
   const populatedBooking = await Booking.findById(booking._id)
-    .populate('user', 'name email role phone address')
-    .populate(
-      'car',
-      'name description color isElectric features pricePerHour status isDeleted createdAt updatedAt',
-    )
+    .populate('user')
+    .populate('car')
     .exec();
 
   if (!populatedBooking) {

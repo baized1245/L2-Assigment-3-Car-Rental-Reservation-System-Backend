@@ -3,7 +3,6 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { CarServices } from './car.service';
 import { NotFoundResponse } from '../../utils/noDataFoundResponse';
-// import AppError from '../../errors/AppError';
 
 //Create a car (admin controller )
 const craeteCar = catchAsync(async (req, res) => {
@@ -20,8 +19,6 @@ const craeteCar = catchAsync(async (req, res) => {
 //get all cars (public controller)
 const getAllCars = catchAsync(async (req, res) => {
   const result = await CarServices.getAllCarFromDB();
-
-  // console.log(result);
 
   if (!result || result.length === 0) {
     return NotFoundResponse(res);
@@ -101,21 +98,3 @@ export const CarControllers = {
   deleteACar,
   returnACar,
 };
-
-// // Return a car
-// const returnACar = catchAsync(async (req, res) => {
-//   const { bookingId, endTime } = req.body;
-
-//   // console.log(bookingId);
-
-//   // Call service to return the car
-//   const result = await CarServices.returnTheCarFromUser(bookingId, endTime);
-
-//   // Send response with the updated booking details
-//   sendResponse(res, {
-//     success: true,
-//     statusCode: httpStatus.OK,
-//     message: 'Car returned successfully!',
-//     data: result,
-//   });
-// });

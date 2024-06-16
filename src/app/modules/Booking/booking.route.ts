@@ -29,7 +29,7 @@ router.get(
   BookingControllers.getMyBookings,
 );
 
-// Return Car route (admin only)
+// Return A Car route (admin only)
 router.put(
   '/bookings/return',
   auth(USER_ROLE.admin),
